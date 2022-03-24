@@ -20,13 +20,13 @@ namespace EmployeeUI
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Container = Configure();
-            Application.Run(new XtraHome(Container.Resolve<IDeparmentService>(), Container.Resolve<IEmployeeService>()));
+            Application.Run(new XtraHome(Container.Resolve<IDepartmentService>(), Container.Resolve<IEmployeeService>()));
         }
 
         static IContainer Configure()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<DerpartmentManager>().As<IDeparmentService>();
+            builder.RegisterType<DerpartmentManager>().As<IDepartmentService>();
             builder.RegisterType<EfDeparmentDal>().As<IDeparmentDal>();
 
             builder.RegisterType<EmployeeManager>().As<IEmployeeService>();

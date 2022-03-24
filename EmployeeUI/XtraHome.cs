@@ -15,11 +15,11 @@ namespace EmployeeUI
 {
     public partial class XtraHome : DevExpress.XtraEditors.XtraForm
     {
-        private readonly IDeparmentService _deparmentService;
+        private readonly IDepartmentService _deparmentService;
         private readonly IEmployeeService _employeeService;
 
         public XtraEmployeeList employeeList;
-        public XtraHome(IDeparmentService deparmentService, IEmployeeService employeeService)
+        public XtraHome(IDepartmentService deparmentService, IEmployeeService employeeService)
         {
             InitializeComponent();
             _deparmentService = deparmentService;  

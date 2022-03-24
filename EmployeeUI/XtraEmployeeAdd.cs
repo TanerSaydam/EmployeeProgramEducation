@@ -15,15 +15,15 @@ namespace EmployeeUI
 {
     public partial class XtraEmployeeAdd : DevExpress.XtraEditors.XtraForm
     {
-        private readonly IDeparmentService _deparmentService;
+        private readonly IDepartmentService _departmentService;
         private readonly IEmployeeService _employeeService;
 
         public XtraEmployeeList employeeList;
 
-        public XtraEmployeeAdd(IDeparmentService deparmentService, IEmployeeService employeeService)
+        public XtraEmployeeAdd(IDepartmentService deparmentService, IEmployeeService employeeService)
         {
             InitializeComponent();
-            _deparmentService = deparmentService;
+            _departmentService = deparmentService;
             _employeeService = employeeService;
         }
 
@@ -32,7 +32,7 @@ namespace EmployeeUI
 
         private void XtraEmployee_Load(object sender, EventArgs e)
         {
-            var departments = _deparmentService.GetListWithStatusTrue();
+            var departments = _departmentService.GetListWithStatusTrue();
             foreach (var department in departments)
             {
                 txtDeparment.Properties.Items.Add(department.Name.ToUpper());
@@ -67,7 +67,7 @@ namespace EmployeeUI
 
         private void txtDeparment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            departmentId = _deparmentService.GetDepartmentId(txtDeparment.Text);           
+            departmentId = _departmentService.GetDepartmentId(txtDeparment.Text);           
         }
            
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

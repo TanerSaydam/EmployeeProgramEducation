@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IDeparmentService
+    public interface IDepartmentService
     {
         bool Add(Department department);
         bool Update(Department department);

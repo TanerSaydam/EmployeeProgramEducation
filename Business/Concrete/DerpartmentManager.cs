@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class DerpartmentManager : IDeparmentService
+    public class DerpartmentManager : IDepartmentService
     {
         private readonly IDeparmentDal _deparmentDal;
 

@@ -39,6 +39,16 @@ namespace Business.Concrete
             return false;
         }
 
+        public void Delete(Employee employee)
+        {
+            _employeeDal.Delete(employee);
+        }
+
+        public Employee Get(int id)
+        {
+            return _employeeDal.Get(e => e.Id == id);
+        }
+
         public List<Employee> GetAll()
         {
             return _employeeDal.GetList();
@@ -47,6 +57,37 @@ namespace Business.Concrete
         public List<EmployeeDto> GetEmployeeList()
         {
             return _employeeDal.GetEmployeeList();
+        }
+
+        public void QuitJob(Employee employee)
+        {
+            _employeeDal.Update(employee);
+            MessageBox.Show("Personel çıkış işlemi başarılı.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public bool Update(Employee employee)
+        {
+            bool validation = ValidationTool.Validate(new EmployeeValidator(), employee);
+            if (validation)
+            {
+                var findEmployee = _employeeDal.Get(i=> i.Id == employee.Id);
+                var result = true;
+
+                if (findEmployee.IdentityNumber != employee.IdentityNumber)
+                {
+                    result = _employeeDal.CheckIdentityNumber(employee.IdentityNumber);
+                    if (!result)
+                    {
+                        MessageBox.Show("Bu T.C. numarası daha önce kullanılmış!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                }                
+                
+                _employeeDal.Update(employee);
+                MessageBox.Show("Personel başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+            return false;
         }
     }
 }
