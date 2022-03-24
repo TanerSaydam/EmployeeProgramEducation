@@ -47,6 +47,13 @@ namespace EmployeeUI
             btnDismiss.Text = "Ayrılan: " + dismiss;
 
             lbActiveList.Text = "Çalışan Listesi";
+
+            gridView1.Columns[7].Visible = false; //İşten Ayrılma Tarihi
+            gridView1.Columns[8].Visible = false; //Ayrılma Sebebi
+            gridView1.Columns[9].Visible = true; //Güncelle
+            gridView1.Columns[10].Visible = true; //İşten Çıkart
+            gridView1.Columns[11].Visible = true; //Sil
+            gridView1.Columns[12].Visible = false; //İşte Tekrar Al
         }
 
         void GetOffEmployeeList()
@@ -55,6 +62,13 @@ namespace EmployeeUI
             gCEmployeeList.DataSource = employeeList;
 
             lbActiveList.Text = "İzinli Listesi";
+
+            gridView1.Columns[7].Visible = false; //İşten Ayrılma Tarihi
+            gridView1.Columns[8].Visible = false; //Ayrılma Sebebi
+            gridView1.Columns[9].Visible = true; //Güncelle
+            gridView1.Columns[10].Visible = true; //İşten Çıkart
+            gridView1.Columns[11].Visible = true; //Sil
+            gridView1.Columns[12].Visible = false; //İşte Tekrar Al
         }
 
         void GetDismissEmployeeList()
@@ -63,16 +77,18 @@ namespace EmployeeUI
             gCEmployeeList.DataSource = employeeList;
 
             lbActiveList.Text = "Ayrılanlar Listesi";
-            
+
+            gridView1.Columns[8].Visible = true; //Ayrılma Sebebi
+            gridView1.Columns[7].Visible = true; //İşten Ayrılma Tarihi            
+            gridView1.Columns[9].Visible = false; //Güncelle
+            gridView1.Columns[10].Visible = false; //İşten Çıkart
+            gridView1.Columns[11].Visible = false; //Sil
+            gridView1.Columns[12].Visible = true; //İşte Tekrar Al
+
         }
 
         private void repositoryBtnEdit_Click(object sender, EventArgs e)
-        {
-            if ((gridView1.GetFocusedRow() as EmployeeDto).Status == "İşten Ayrıldı")
-            {
-                MessageBox.Show("İşten ayrılmış personel güncellenemez!", "Hata!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+        {           
 
             int id = (gridView1.GetFocusedRow() as EmployeeDto).Id;
 
@@ -85,12 +101,7 @@ namespace EmployeeUI
         }
 
         private void repositoryBtnDelete_Click(object sender, EventArgs e)
-        {
-            if ((gridView1.GetFocusedRow() as EmployeeDto).Status == "İşten Ayrıldı")
-            {
-                MessageBox.Show("İşten ayrılmış personel silinemez!", "Hata!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+        {            
 
             if (MessageBox.Show($"{(gridView1.GetFocusedRow() as EmployeeDto).Name} personelini silmek istiyor musunuz?","Sil?",MessageBoxButtons.YesNo,MessageBoxIcon.Question)== DialogResult.Yes)
             {
@@ -102,12 +113,7 @@ namespace EmployeeUI
         }
 
         private void repositoryBtnEmployeeQuit_Click(object sender, EventArgs e)
-        {
-            if ((gridView1.GetFocusedRow() as EmployeeDto).Status == "İşten Ayrıldı")
-            {
-                MessageBox.Show("İşten ayrılmış personel tekrar çıkartılamaz!", "Hata!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+        {            
 
             int id = (gridView1.GetFocusedRow() as EmployeeDto).Id;
 
@@ -132,6 +138,17 @@ namespace EmployeeUI
         private void btnEmployee_Click(object sender, EventArgs e)
         {
             GetList();
+        }
+
+        private void repositoryBtnReHired_Click(object sender, EventArgs e)
+        {
+            XtraReHired reHired;
+            reHired = new XtraReHired(_employeeService);
+            reHired.employeeList = this;
+            reHired.Show();
+
+            int id = (gridView1.GetFocusedRow() as EmployeeDto).Id;
+            reHired.employeeId = id;
         }
     }
 }

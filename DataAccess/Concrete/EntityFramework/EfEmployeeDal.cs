@@ -41,7 +41,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  ReasonOfLeaving = employee.ReasonOfLeaving,
                                  Salary = employee.Salary,
                                  StartingDate = employee.StartingDate,
-                                 Status = employee.Status
+                                 Status = employee.Status                                 
                              };
 
                 return result.OrderBy(o=> o.Name).ToList();

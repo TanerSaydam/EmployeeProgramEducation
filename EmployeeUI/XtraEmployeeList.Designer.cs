@@ -50,16 +50,20 @@
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDepartmentName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colIdentityNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colBirthDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSalary = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStartingDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colIdentityNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colEndingDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colReasonOfLeaving = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colEdit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryBtnEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.colEmployeeQuit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryBtnEmployeeQuit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.colDelete = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryBtnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.colReHired = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryBtnReHired = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -77,6 +81,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryBtnEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryBtnEmployeeQuit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryBtnDelete)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryBtnReHired)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
@@ -112,9 +117,12 @@
             this.lbActiveList.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.lbActiveList.Appearance.Options.UseFont = true;
             this.lbActiveList.Appearance.Options.UseForeColor = true;
+            this.lbActiveList.Appearance.Options.UseTextOptions = true;
+            this.lbActiveList.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.lbActiveList.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lbActiveList.Location = new System.Drawing.Point(12, 71);
             this.lbActiveList.Name = "lbActiveList";
-            this.lbActiveList.Size = new System.Drawing.Size(137, 29);
+            this.lbActiveList.Size = new System.Drawing.Size(1320, 29);
             this.lbActiveList.StyleController = this.layoutControl1;
             this.lbActiveList.TabIndex = 10;
             this.lbActiveList.Text = "labelControl1";
@@ -234,7 +242,8 @@
             this.gCEmployeeList.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryBtnEdit,
             this.repositoryBtnDelete,
-            this.repositoryBtnEmployeeQuit});
+            this.repositoryBtnEmployeeQuit,
+            this.repositoryBtnReHired});
             this.gCEmployeeList.Size = new System.Drawing.Size(1000, 524);
             this.gCEmployeeList.TabIndex = 4;
             this.gCEmployeeList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -246,13 +255,16 @@
             this.colId,
             this.colName,
             this.colDepartmentName,
+            this.colIdentityNumber,
             this.colBirthDate,
             this.colSalary,
             this.colStartingDate,
-            this.colIdentityNumber,
+            this.colEndingDate,
+            this.colReasonOfLeaving,
             this.colEdit,
             this.colEmployeeQuit,
-            this.colDelete});
+            this.colDelete,
+            this.colReHired});
             this.gridView1.GridControl = this.gCEmployeeList;
             this.gridView1.Name = "gridView1";
             // 
@@ -278,13 +290,21 @@
             this.colDepartmentName.Visible = true;
             this.colDepartmentName.VisibleIndex = 1;
             // 
+            // colIdentityNumber
+            // 
+            this.colIdentityNumber.Caption = "T.C. Numarası";
+            this.colIdentityNumber.FieldName = "IdentityNumber";
+            this.colIdentityNumber.Name = "colIdentityNumber";
+            this.colIdentityNumber.Visible = true;
+            this.colIdentityNumber.VisibleIndex = 2;
+            // 
             // colBirthDate
             // 
             this.colBirthDate.Caption = "Doğum Tarihi";
             this.colBirthDate.FieldName = "BirthDate";
             this.colBirthDate.Name = "colBirthDate";
             this.colBirthDate.Visible = true;
-            this.colBirthDate.VisibleIndex = 2;
+            this.colBirthDate.VisibleIndex = 3;
             // 
             // colSalary
             // 
@@ -294,7 +314,7 @@
             this.colSalary.FieldName = "Salary";
             this.colSalary.Name = "colSalary";
             this.colSalary.Visible = true;
-            this.colSalary.VisibleIndex = 3;
+            this.colSalary.VisibleIndex = 4;
             // 
             // colStartingDate
             // 
@@ -302,15 +322,23 @@
             this.colStartingDate.FieldName = "StartingDate";
             this.colStartingDate.Name = "colStartingDate";
             this.colStartingDate.Visible = true;
-            this.colStartingDate.VisibleIndex = 4;
+            this.colStartingDate.VisibleIndex = 5;
             // 
-            // colIdentityNumber
+            // colEndingDate
             // 
-            this.colIdentityNumber.Caption = "T.C. Numarası";
-            this.colIdentityNumber.FieldName = "IdentityNumber";
-            this.colIdentityNumber.Name = "colIdentityNumber";
-            this.colIdentityNumber.Visible = true;
-            this.colIdentityNumber.VisibleIndex = 5;
+            this.colEndingDate.Caption = "İşten Çıkış Tarihi";
+            this.colEndingDate.FieldName = "EndingDate";
+            this.colEndingDate.Name = "colEndingDate";
+            this.colEndingDate.Visible = true;
+            this.colEndingDate.VisibleIndex = 6;
+            // 
+            // colReasonOfLeaving
+            // 
+            this.colReasonOfLeaving.Caption = "Ayrılma Sebebi";
+            this.colReasonOfLeaving.FieldName = "ReasonOfLeaving";
+            this.colReasonOfLeaving.Name = "colReasonOfLeaving";
+            this.colReasonOfLeaving.Visible = true;
+            this.colReasonOfLeaving.VisibleIndex = 7;
             // 
             // colEdit
             // 
@@ -318,7 +346,7 @@
             this.colEdit.ColumnEdit = this.repositoryBtnEdit;
             this.colEdit.Name = "colEdit";
             this.colEdit.Visible = true;
-            this.colEdit.VisibleIndex = 6;
+            this.colEdit.VisibleIndex = 8;
             // 
             // repositoryBtnEdit
             // 
@@ -335,7 +363,7 @@
             this.colEmployeeQuit.ColumnEdit = this.repositoryBtnEmployeeQuit;
             this.colEmployeeQuit.Name = "colEmployeeQuit";
             this.colEmployeeQuit.Visible = true;
-            this.colEmployeeQuit.VisibleIndex = 7;
+            this.colEmployeeQuit.VisibleIndex = 9;
             // 
             // repositoryBtnEmployeeQuit
             // 
@@ -353,7 +381,7 @@
             this.colDelete.ColumnEdit = this.repositoryBtnDelete;
             this.colDelete.Name = "colDelete";
             this.colDelete.Visible = true;
-            this.colDelete.VisibleIndex = 8;
+            this.colDelete.VisibleIndex = 10;
             // 
             // repositoryBtnDelete
             // 
@@ -363,6 +391,23 @@
             this.repositoryBtnDelete.Name = "repositoryBtnDelete";
             this.repositoryBtnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.repositoryBtnDelete.Click += new System.EventHandler(this.repositoryBtnDelete_Click);
+            // 
+            // colReHired
+            // 
+            this.colReHired.Caption = "İşe Tekrar Al";
+            this.colReHired.ColumnEdit = this.repositoryBtnReHired;
+            this.colReHired.Name = "colReHired";
+            this.colReHired.Visible = true;
+            this.colReHired.VisibleIndex = 11;
+            // 
+            // repositoryBtnReHired
+            // 
+            this.repositoryBtnReHired.AutoHeight = false;
+            this.repositoryBtnReHired.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryBtnReHired.Name = "repositoryBtnReHired";
+            this.repositoryBtnReHired.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.repositoryBtnReHired.Click += new System.EventHandler(this.repositoryBtnReHired_Click);
             // 
             // Root
             // 
@@ -465,6 +510,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryBtnEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryBtnEmployeeQuit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryBtnDelete)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryBtnReHired)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
@@ -491,18 +537,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColEmployeeCount;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryBtnEdit;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryBtnDelete;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn colId;
-        private DevExpress.XtraGrid.Columns.GridColumn colName;
-        private DevExpress.XtraGrid.Columns.GridColumn colDepartmentName;
-        private DevExpress.XtraGrid.Columns.GridColumn colBirthDate;
-        private DevExpress.XtraGrid.Columns.GridColumn colSalary;
-        private DevExpress.XtraGrid.Columns.GridColumn colStartingDate;
-        private DevExpress.XtraGrid.Columns.GridColumn colIdentityNumber;
-        private DevExpress.XtraGrid.Columns.GridColumn colEdit;
-        private DevExpress.XtraGrid.Columns.GridColumn colEmployeeQuit;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryBtnEmployeeQuit;
-        private DevExpress.XtraGrid.Columns.GridColumn colDelete;
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.LabelControl btnDismiss;
         private DevExpress.XtraEditors.LabelControl btnOff;
@@ -513,5 +548,20 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraEditors.LabelControl lbActiveList;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryBtnReHired;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Columns.GridColumn colId;
+        private DevExpress.XtraGrid.Columns.GridColumn colName;
+        private DevExpress.XtraGrid.Columns.GridColumn colDepartmentName;
+        private DevExpress.XtraGrid.Columns.GridColumn colIdentityNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colBirthDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colSalary;
+        private DevExpress.XtraGrid.Columns.GridColumn colStartingDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colEndingDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colReasonOfLeaving;
+        private DevExpress.XtraGrid.Columns.GridColumn colEdit;
+        private DevExpress.XtraGrid.Columns.GridColumn colEmployeeQuit;
+        private DevExpress.XtraGrid.Columns.GridColumn colDelete;
+        private DevExpress.XtraGrid.Columns.GridColumn colReHired;
     }
 }

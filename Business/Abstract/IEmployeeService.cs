@@ -13,6 +13,7 @@ namespace Business.Abstract
         bool Add(Employee employee);  
         bool Update(Employee employee);  
         void QuitJob(Employee employee);  
+        void ReHired(Employee employee);  
         void Delete(Employee employee);  
         Employee Get(int id);
         List<Employee> GetAll();

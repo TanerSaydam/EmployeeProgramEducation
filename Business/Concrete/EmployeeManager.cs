@@ -65,6 +65,12 @@ namespace Business.Concrete
             MessageBox.Show("Personel çıkış işlemi başarılı.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        public void ReHired(Employee employee)
+        {
+            _employeeDal.Update(employee);
+            MessageBox.Show("Personel girişi başarıyla gerçekleştirildi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         public bool Update(Employee employee)
         {
             bool validation = ValidationTool.Validate(new EmployeeValidator(), employee);
