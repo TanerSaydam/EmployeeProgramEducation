@@ -27,62 +27,53 @@ namespace Business.Concrete
             {
                 if (MessageBox.Show("Bu aya ait bir bordro var. İşeleme devam ederseniz bordro silinip tekrar hesaplanacak. İşleme devam etmek istiyor musunuz?","Bordro Mevcut!",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-
                     foreach (var payroll in payrollList)
                     {
                         _payrollDal.Delete(payroll);
-                    }
+                    }                    
+                }
+                else
+                {
+                    return false;
+                }
+            }
 
-                    int serviceDay = 0;
+            int serviceDay = 0;
 
-                    var parameter = _payrollDal.GetPayrollParameter();
+            var parameter = _payrollDal.GetPayrollParameter();
 
-                    var employees = _payrollDal.GetEmployeeListe();
-                    foreach (var employee in employees)
+            var employees = _payrollDal.GetEmployeeListe();
+            foreach (var employee in employees)
+            {
+                int offDays = _payrollDal.GetEmployeeOffDayCount(employee.Id, mounth, year);
+
+                DateTime date1 = Convert.ToDateTime("01." + mounth + "." + year); //01.02.2022
+                DateTime date2 = date1.AddMonths(1);
+                date2 = date2.AddDays(-1); //28.02.2022
+
+                //01.10.2021 01.02.2022
+                //02.02.2022 31.03.2022
+                //10.02.2022
+
+
+                if (employee.StartingDate <= date2)
+                {
+                    if (employee.Status == "İşten Ayrıldı")
                     {
-                        int offDays = _payrollDal.GetEmployeeOffDayCount(employee.Id, mounth, year);
-
-                        DateTime date1 = Convert.ToDateTime("01." + mounth + "." + year); //01.02.2022
-                        DateTime date2 = date1.AddMonths(1);
-                        date2 = date2.AddDays(-1); //28.02.2022
-
-                        //01.10.2021 01.02.2022
-                        //02.02.2022 31.03.2022
-                        //10.02.2022
-
-
-                        if (employee.StartingDate <= date2)
+                        if (employee.EndingDate >= date1)
                         {
-                            if (employee.Status == "İşten Ayrıldı")
+                            if (employee.EndingDate <= date2)
                             {
-                                if (employee.EndingDate >= date1)
+                                TimeSpan ts = date2 - employee.StartingDate;
+                                if ((Convert.ToInt16(ts.Days.ToString()) + 1) >= date2.Day)
                                 {
-                                    if (employee.EndingDate <= date2)
-                                    {
-                                        TimeSpan ts = date2 - employee.StartingDate;
-                                        if ((Convert.ToInt16(ts.Days.ToString()) + 1) >= date2.Day)
-                                        {
-                                            ts = Convert.ToDateTime(employee.EndingDate) - date1;
-                                            serviceDay = (Convert.ToInt16(ts.Days.ToString()) + 1);
-                                        }
-                                        else
-                                        {
-                                            ts = Convert.ToDateTime(employee.EndingDate) - employee.StartingDate;
-                                            serviceDay = (Convert.ToInt16(ts.Days.ToString()) + 1);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        TimeSpan ts = date2 - employee.StartingDate;
-                                        if ((Convert.ToInt16(ts.Days.ToString()) + 1) >= date2.Day)
-                                        {
-                                            serviceDay = 30;
-                                        }
-                                        else
-                                        {
-                                            serviceDay = (Convert.ToInt16(ts.Days.ToString()) + 1);
-                                        }
-                                    }
+                                    ts = Convert.ToDateTime(employee.EndingDate) - date1;
+                                    serviceDay = (Convert.ToInt16(ts.Days.ToString()) + 1);
+                                }
+                                else
+                                {
+                                    ts = Convert.ToDateTime(employee.EndingDate) - employee.StartingDate;
+                                    serviceDay = (Convert.ToInt16(ts.Days.ToString()) + 1);
                                 }
                             }
                             else
@@ -98,42 +89,55 @@ namespace Business.Concrete
                                 }
                             }
                         }
-
-                        if (serviceDay > 0)
-                        {
-                            decimal cumulatice = 0;
-                            int m = mounth;
-                            while (m == 0)
-                            {
-                                m--;
-                                var findPayrol = _payrollDal.Get(g => g.EmployeeId == employee.Id && g.Mounth == m && g.Year == year);
-                                cumulatice = cumulatice + findPayrol.IncomeTaxAssessment;
-                            }
-
-                            serviceDay = serviceDay - offDays;
-
-                            Payroll payroll = new Payroll
-                            {
-                                EmployeeId = employee.Id,
-                                NetPay = (employee.Salary / 30) * serviceDay,
-                                ServiceDay = serviceDay,
-                                Mounth = mounth,
-                                Year = year,
-                                GrossPay = (((employee.Salary / 30) * serviceDay) - ((parameter.Parameter1 / 30) * serviceDay)) * parameter.Parameter2,
-                                InsurancePremiumEmployeeShare = ((((employee.Salary / 30) * serviceDay) - ((parameter.Parameter1 / 30) * serviceDay)) * parameter.Parameter2) * 15 / 100,
-                                IncomeTaxAssessment = ((((employee.Salary / 30) * serviceDay) - ((parameter.Parameter1 / 30) * serviceDay)) * parameter.Parameter2),
-                                CumulaticeİncomeTaxAssessment = cumulatice + ((((employee.Salary / 30) * serviceDay) - ((parameter.Parameter1 / 30) * serviceDay)) * parameter.Parameter2)
-                            };
-
-                            _payrollDal.Add(payroll);
-                        }
-
                     }
-                    //_payrollDal.Add(payroll);
-                    return true;
+                    else
+                    {
+                        TimeSpan ts = date2 - employee.StartingDate;
+                        if ((Convert.ToInt16(ts.Days.ToString()) + 1) >= date2.Day)
+                        {
+                            serviceDay = 30;
+                        }
+                        else
+                        {
+                            serviceDay = (Convert.ToInt16(ts.Days.ToString()) + 1);
+                        }
+                    }
                 }
+
+                if (serviceDay > 0)
+                {
+                    decimal cumulatice = 0;
+                    int m = mounth;
+                    while (m == 0)
+                    {
+                        m--;
+                        var findPayrol = _payrollDal.Get(g => g.EmployeeId == employee.Id && g.Mounth == m && g.Year == year);
+                        cumulatice = cumulatice + findPayrol.IncomeTaxAssessment;
+                    }
+
+                    serviceDay = serviceDay - offDays;
+
+                    Payroll payroll = new Payroll
+                    {
+                        EmployeeId = employee.Id,
+                        NetPay = (employee.Salary / 30) * serviceDay,
+                        ServiceDay = serviceDay,
+                        Mounth = mounth,
+                        Year = year,
+                        GrossPay = (((employee.Salary / 30) * serviceDay) - ((parameter.Parameter1 / 30) * serviceDay)) * parameter.Parameter2,
+                        InsurancePremiumEmployeeShare = ((((employee.Salary / 30) * serviceDay) - ((parameter.Parameter1 / 30) * serviceDay)) * parameter.Parameter2) * 15 / 100,
+                        IncomeTaxAssessment = ((((employee.Salary / 30) * serviceDay) - ((parameter.Parameter1 / 30) * serviceDay)) * parameter.Parameter2),
+                        CumulaticeİncomeTaxAssessment = cumulatice + ((((employee.Salary / 30) * serviceDay) - ((parameter.Parameter1 / 30) * serviceDay)) * parameter.Parameter2)
+                    };
+
+                    _payrollDal.Add(payroll);
+                }
+
             }
-            return false;
+            //_payrollDal.Add(payroll);
+            return true;
+
+            
         }
 
         public void Delete(Payroll payroll)

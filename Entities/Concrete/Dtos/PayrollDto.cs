@@ -18,7 +18,7 @@ namespace Entities.Concrete.Dtos
         public decimal GrossPay { get; set; }
         public decimal InsurancePremiumEmployeeShare { get; set; }
         public decimal IncomeTaxAssessment { get; set; }
-        public decimal CumulaticeİncomeTaxAssessment { get; set; }
+        public decimal CumulaticeIncomeTaxAssessment { get; set; }
         public decimal NetPay { get; set; }
     }
 }

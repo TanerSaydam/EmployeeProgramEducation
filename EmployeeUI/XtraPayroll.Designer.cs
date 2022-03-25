@@ -29,15 +29,41 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XtraPayroll));
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.btnExcel = new DevExpress.XtraEditors.SimpleButton();
             this.btnClose = new DevExpress.XtraEditors.SimpleButton();
             this.txtYear = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txtMounth = new DevExpress.XtraEditors.ComboBoxEdit();
             this.btnPayroll = new DevExpress.XtraEditors.SimpleButton();
             this.gC2 = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colEmployeeId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colIdentityNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colMounth2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colYear2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colServiceDay = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colGrossPay = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colInsurancePremiumEmployeeShare = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colİncomeTaxAssessment = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCumulaticeIncomeTaxAssessment = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNetPay = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colEmployeeParyrollEmail = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryEmployeePayrollEmail = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gC1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colMounth = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colYear = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colEmployeeCount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTotalPay = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colMail = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryBtnMail = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -45,7 +71,6 @@
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnExcel = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -53,8 +78,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtMounth.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gC2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryEmployeePayrollEmail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gC1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryBtnMail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
@@ -81,6 +108,17 @@
             this.layoutControl1.Size = new System.Drawing.Size(867, 572);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // btnExcel
+            // 
+            this.btnExcel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExcel.ImageOptions.Image")));
+            this.btnExcel.Location = new System.Drawing.Point(12, 100);
+            this.btnExcel.Name = "btnExcel";
+            this.btnExcel.Size = new System.Drawing.Size(230, 36);
+            this.btnExcel.StyleController = this.layoutControl1;
+            this.btnExcel.TabIndex = 7;
+            this.btnExcel.Text = "Excel Oluştur";
+            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
             // 
             // btnClose
             // 
@@ -146,6 +184,8 @@
             this.gC2.Location = new System.Drawing.Point(246, 288);
             this.gC2.MainView = this.gridView2;
             this.gC2.Name = "gC2";
+            this.gC2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryEmployeePayrollEmail});
             this.gC2.Size = new System.Drawing.Size(609, 272);
             this.gC2.TabIndex = 3;
             this.gC2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -153,14 +193,145 @@
             // 
             // gridView2
             // 
+            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colId,
+            this.colEmployeeId,
+            this.colName,
+            this.colIdentityNumber,
+            this.colMounth2,
+            this.colYear2,
+            this.colServiceDay,
+            this.colGrossPay,
+            this.colInsurancePremiumEmployeeShare,
+            this.colİncomeTaxAssessment,
+            this.colCumulaticeIncomeTaxAssessment,
+            this.colNetPay,
+            this.colEmployeeParyrollEmail});
             this.gridView2.GridControl = this.gC2;
             this.gridView2.Name = "gridView2";
+            // 
+            // colId
+            // 
+            this.colId.Caption = "#";
+            this.colId.FieldName = "Id";
+            this.colId.Name = "colId";
+            // 
+            // colEmployeeId
+            // 
+            this.colEmployeeId.Caption = "Personel Id";
+            this.colEmployeeId.FieldName = "EmployeeId";
+            this.colEmployeeId.Name = "colEmployeeId";
+            // 
+            // colName
+            // 
+            this.colName.Caption = "Personel Adı";
+            this.colName.FieldName = "Name";
+            this.colName.Name = "colName";
+            this.colName.Visible = true;
+            this.colName.VisibleIndex = 0;
+            // 
+            // colIdentityNumber
+            // 
+            this.colIdentityNumber.Caption = "T.C. Kimlik Numarası";
+            this.colIdentityNumber.FieldName = "IdentityNumber";
+            this.colIdentityNumber.Name = "colIdentityNumber";
+            this.colIdentityNumber.Visible = true;
+            this.colIdentityNumber.VisibleIndex = 1;
+            // 
+            // colMounth2
+            // 
+            this.colMounth2.Caption = "Dönem";
+            this.colMounth2.FieldName = "Mounth";
+            this.colMounth2.Name = "colMounth2";
+            // 
+            // colYear2
+            // 
+            this.colYear2.Caption = "Yıl";
+            this.colYear2.FieldName = "Year";
+            this.colYear2.Name = "colYear2";
+            // 
+            // colServiceDay
+            // 
+            this.colServiceDay.Caption = "Çalışma Günü";
+            this.colServiceDay.FieldName = "ServiceDay";
+            this.colServiceDay.Name = "colServiceDay";
+            this.colServiceDay.Visible = true;
+            this.colServiceDay.VisibleIndex = 2;
+            // 
+            // colGrossPay
+            // 
+            this.colGrossPay.Caption = "Brüt Ücret";
+            this.colGrossPay.DisplayFormat.FormatString = "n2";
+            this.colGrossPay.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colGrossPay.FieldName = "GorssPay";
+            this.colGrossPay.Name = "colGrossPay";
+            this.colGrossPay.Visible = true;
+            this.colGrossPay.VisibleIndex = 3;
+            // 
+            // colInsurancePremiumEmployeeShare
+            // 
+            this.colInsurancePremiumEmployeeShare.Caption = "İşçi Payı %15";
+            this.colInsurancePremiumEmployeeShare.DisplayFormat.FormatString = "n2";
+            this.colInsurancePremiumEmployeeShare.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colInsurancePremiumEmployeeShare.FieldName = "InsurancePremiumEmployeeShare";
+            this.colInsurancePremiumEmployeeShare.Name = "colInsurancePremiumEmployeeShare";
+            this.colInsurancePremiumEmployeeShare.Visible = true;
+            this.colInsurancePremiumEmployeeShare.VisibleIndex = 4;
+            // 
+            // colİncomeTaxAssessment
+            // 
+            this.colİncomeTaxAssessment.Caption = "Gelir Vergisi Matrahı";
+            this.colİncomeTaxAssessment.DisplayFormat.FormatString = "n2";
+            this.colİncomeTaxAssessment.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colİncomeTaxAssessment.FieldName = "IncomeTaxAssessment";
+            this.colİncomeTaxAssessment.Name = "colİncomeTaxAssessment";
+            this.colİncomeTaxAssessment.Visible = true;
+            this.colİncomeTaxAssessment.VisibleIndex = 5;
+            // 
+            // colCumulaticeIncomeTaxAssessment
+            // 
+            this.colCumulaticeIncomeTaxAssessment.Caption = "Kümülatif Gelir Vergisi Matrahı";
+            this.colCumulaticeIncomeTaxAssessment.DisplayFormat.FormatString = "n2";
+            this.colCumulaticeIncomeTaxAssessment.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colCumulaticeIncomeTaxAssessment.FieldName = "CumulaticeIncomeTaxAssessment";
+            this.colCumulaticeIncomeTaxAssessment.Name = "colCumulaticeIncomeTaxAssessment";
+            this.colCumulaticeIncomeTaxAssessment.Visible = true;
+            this.colCumulaticeIncomeTaxAssessment.VisibleIndex = 6;
+            // 
+            // colNetPay
+            // 
+            this.colNetPay.Caption = "Net Ücret";
+            this.colNetPay.DisplayFormat.FormatString = "n2";
+            this.colNetPay.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colNetPay.FieldName = "NetPay";
+            this.colNetPay.Name = "colNetPay";
+            this.colNetPay.Visible = true;
+            this.colNetPay.VisibleIndex = 7;
+            // 
+            // colEmployeeParyrollEmail
+            // 
+            this.colEmployeeParyrollEmail.Caption = "Mail Gönder";
+            this.colEmployeeParyrollEmail.ColumnEdit = this.repositoryEmployeePayrollEmail;
+            this.colEmployeeParyrollEmail.Name = "colEmployeeParyrollEmail";
+            this.colEmployeeParyrollEmail.Visible = true;
+            this.colEmployeeParyrollEmail.VisibleIndex = 8;
+            // 
+            // repositoryEmployeePayrollEmail
+            // 
+            this.repositoryEmployeePayrollEmail.AutoHeight = false;
+            this.repositoryEmployeePayrollEmail.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus)});
+            this.repositoryEmployeePayrollEmail.Name = "repositoryEmployeePayrollEmail";
+            this.repositoryEmployeePayrollEmail.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.repositoryEmployeePayrollEmail.Click += new System.EventHandler(this.repositoryEmployeePayrollEmail_Click);
             // 
             // gC1
             // 
             this.gC1.Location = new System.Drawing.Point(246, 12);
             this.gC1.MainView = this.gridView1;
             this.gC1.Name = "gC1";
+            this.gC1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryBtnMail});
             this.gC1.Size = new System.Drawing.Size(609, 272);
             this.gC1.TabIndex = 2;
             this.gC1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -168,10 +339,68 @@
             // 
             // gridView1
             // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colMounth,
+            this.colYear,
+            this.colEmployeeCount,
+            this.colTotalPay,
+            this.colMail});
             this.gridView1.GridControl = this.gC1;
             this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsBehavior.Editable = false;
             this.gridView1.Click += new System.EventHandler(this.gridView1_Click);
+            // 
+            // colMounth
+            // 
+            this.colMounth.Caption = "Dönem";
+            this.colMounth.FieldName = "MounthName";
+            this.colMounth.Name = "colMounth";
+            this.colMounth.Visible = true;
+            this.colMounth.VisibleIndex = 0;
+            // 
+            // colYear
+            // 
+            this.colYear.Caption = "Yıl";
+            this.colYear.FieldName = "Year";
+            this.colYear.Name = "colYear";
+            this.colYear.Visible = true;
+            this.colYear.VisibleIndex = 1;
+            // 
+            // colEmployeeCount
+            // 
+            this.colEmployeeCount.Caption = "Personel Sayısı";
+            this.colEmployeeCount.FieldName = "EmployeeCount";
+            this.colEmployeeCount.Name = "colEmployeeCount";
+            this.colEmployeeCount.Visible = true;
+            this.colEmployeeCount.VisibleIndex = 2;
+            // 
+            // colTotalPay
+            // 
+            this.colTotalPay.Caption = "Toplam Net Maaş";
+            this.colTotalPay.DisplayFormat.FormatString = "n2";
+            this.colTotalPay.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colTotalPay.FieldName = "TotalNetPay";
+            this.colTotalPay.Name = "colTotalPay";
+            this.colTotalPay.Visible = true;
+            this.colTotalPay.VisibleIndex = 3;
+            // 
+            // colMail
+            // 
+            this.colMail.Caption = "Mail Gönder";
+            this.colMail.ColumnEdit = this.repositoryBtnMail;
+            this.colMail.Name = "colMail";
+            this.colMail.Visible = true;
+            this.colMail.VisibleIndex = 4;
+            // 
+            // repositoryBtnMail
+            // 
+            this.repositoryBtnMail.AutoHeight = false;
+            editorButtonImageOptions2.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            editorButtonImageOptions2.Image = ((System.Drawing.Image)(resources.GetObject("editorButtonImageOptions2.Image")));
+            this.repositoryBtnMail.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.repositoryBtnMail.Name = "repositoryBtnMail";
+            this.repositoryBtnMail.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.repositoryBtnMail.Click += new System.EventHandler(this.repositoryBtnMail_Click);
             // 
             // Root
             // 
@@ -243,17 +472,6 @@
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextVisible = false;
             // 
-            // btnExcel
-            // 
-            this.btnExcel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExcel.ImageOptions.Image")));
-            this.btnExcel.Location = new System.Drawing.Point(12, 100);
-            this.btnExcel.Name = "btnExcel";
-            this.btnExcel.Size = new System.Drawing.Size(230, 36);
-            this.btnExcel.StyleController = this.layoutControl1;
-            this.btnExcel.TabIndex = 7;
-            this.btnExcel.Text = "Excel Oluştur";
-            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
-            // 
             // layoutControlItem7
             // 
             this.layoutControlItem7.Control = this.btnExcel;
@@ -278,8 +496,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtMounth.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gC2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryEmployeePayrollEmail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gC1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryBtnMail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
@@ -312,5 +532,25 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraEditors.SimpleButton btnExcel;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private DevExpress.XtraGrid.Columns.GridColumn colMounth;
+        private DevExpress.XtraGrid.Columns.GridColumn colYear;
+        private DevExpress.XtraGrid.Columns.GridColumn colEmployeeCount;
+        private DevExpress.XtraGrid.Columns.GridColumn colTotalPay;
+        private DevExpress.XtraGrid.Columns.GridColumn colMail;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryBtnMail;
+        private DevExpress.XtraGrid.Columns.GridColumn colId;
+        private DevExpress.XtraGrid.Columns.GridColumn colEmployeeId;
+        private DevExpress.XtraGrid.Columns.GridColumn colName;
+        private DevExpress.XtraGrid.Columns.GridColumn colIdentityNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colMounth2;
+        private DevExpress.XtraGrid.Columns.GridColumn colYear2;
+        private DevExpress.XtraGrid.Columns.GridColumn colServiceDay;
+        private DevExpress.XtraGrid.Columns.GridColumn colGrossPay;
+        private DevExpress.XtraGrid.Columns.GridColumn colInsurancePremiumEmployeeShare;
+        private DevExpress.XtraGrid.Columns.GridColumn colİncomeTaxAssessment;
+        private DevExpress.XtraGrid.Columns.GridColumn colCumulaticeIncomeTaxAssessment;
+        private DevExpress.XtraGrid.Columns.GridColumn colNetPay;
+        private DevExpress.XtraGrid.Columns.GridColumn colEmployeeParyrollEmail;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryEmployeePayrollEmail;
     }
 }

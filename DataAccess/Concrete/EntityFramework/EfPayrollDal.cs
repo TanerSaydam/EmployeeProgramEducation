@@ -47,6 +47,7 @@ namespace DataAccess.Concrete.EntityFramework
                              select new PayrollListDto
                              {
                                  Mounth = x.PayrollList.FirstOrDefault(),
+                                 MounthName = Convert.ToDateTime("01." + x.PayrollList.FirstOrDefault() + ".2022").ToString("MMMM").ToUpper(),
                                  Year = 2022,
                                  EmployeeCount = context.Payrolls.Where(p => p.Mounth == x.PayrollList.FirstOrDefault() && p.Year == 2022).Count(),
                                  TotalNetPay = context.Payrolls.Where(p => p.Mounth == x.PayrollList.FirstOrDefault() && p.Year == 2022).Sum(s => s.NetPay)
@@ -65,7 +66,7 @@ namespace DataAccess.Concrete.EntityFramework
                              {
                                  Id = payroll.Id,
                                  EmployeeId = employee.Id,
-                                 CumulaticeİncomeTaxAssessment = payroll.CumulaticeİncomeTaxAssessment,
+                                 CumulaticeIncomeTaxAssessment = payroll.CumulaticeİncomeTaxAssessment,
                                  GrossPay = payroll.GrossPay,
                                  IdentityNumber = employee.IdentityNumber,
                                  IncomeTaxAssessment = payroll.IncomeTaxAssessment,
