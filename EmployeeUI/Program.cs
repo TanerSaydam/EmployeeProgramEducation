@@ -20,7 +20,7 @@ namespace EmployeeUI
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Container = Configure();
-            Application.Run(new XtraHome(Container.Resolve<IDepartmentService>(), Container.Resolve<IEmployeeService>()));
+            Application.Run(new XtraHome(Container.Resolve<IDepartmentService>(), Container.Resolve<IEmployeeService>(), Container.Resolve<IOffDayService>(), Container.Resolve<IPayrollParameterService>(), Container.Resolve<IPayrollService>()));
         }
 
         static IContainer Configure()
@@ -31,6 +31,15 @@ namespace EmployeeUI
 
             builder.RegisterType<EmployeeManager>().As<IEmployeeService>();
             builder.RegisterType<EfEmployeeDal>().As<IEmployeeDal>();
+
+            builder.RegisterType<OffDayManager>().As<IOffDayService>();
+            builder.RegisterType<EfOffDayDal>().As<IOffDayDal>();
+
+            builder.RegisterType<PayrollParameterManager>().As<IPayrollParameterService>();
+            builder.RegisterType<EfPayrollParameterDal>().As<IPayrollParameterDal>();
+
+            builder.RegisterType<PayrollManager>().As<IPayrollService>();
+            builder.RegisterType<EfPayrollDal>().As<IPayrollDal>();
 
             builder.RegisterType<XtraHome>();            
             return builder.Build();

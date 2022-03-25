@@ -32,6 +32,14 @@ namespace Business.Concrete
                     MessageBox.Show("Bu T.C. numarası daha önce kullanılmış!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
+
+                var resultSalary = _employeeDal.GetParameter();
+                if (resultSalary.NetMinimumWage >= employee.Salary)
+                {
+                    MessageBox.Show("Personel ücreti asgari ücretten aşağı olamaz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
                 _employeeDal.Add(employee);
                 MessageBox.Show("Personel başarıyla eklendi.","Başarılı",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 return true;
@@ -59,8 +67,24 @@ namespace Business.Concrete
             return _employeeDal.GetEmployeeList();
         }
 
+        public List<OffDayEmployeeDto> GetEmployeeListByOffDay()
+        {
+            return _employeeDal.GetEmployeeListByOffDay();
+        }
+
+        public PayrollParameter GetPayrollParameter()
+        {
+            return _employeeDal.GetParameter();
+        }
+
         public void QuitJob(Employee employee)
         {
+            var result = _employeeDal.GetOffDayByEmployee(employee.Id, Convert.ToDateTime(employee.EndingDate));
+            if (result != null)
+            {
+                MessageBox.Show("Çıkış tarihi izinli gününe denk geliyor. İzinli gününde personel işten çıkartılamaz!", "Hata!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             _employeeDal.Update(employee);
             MessageBox.Show("Personel çıkış işlemi başarılı.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -87,6 +111,13 @@ namespace Business.Concrete
                         MessageBox.Show("Bu T.C. numarası daha önce kullanılmış!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
+
+                    var resultSalary = _employeeDal.GetParameter();
+                    if (resultSalary.NetMinimumWage >= employee.Salary)
+                    {
+                        MessageBox.Show("Personel ücreti asgari ücretten aşağı olamaz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
                 }                
                 
                 _employeeDal.Update(employee);
@@ -94,6 +125,11 @@ namespace Business.Concrete
                 return true;
             }
             return false;
+        }
+
+        public void UpdateList(Employee employee)
+        {
+            _employeeDal.Update(employee);
         }
     }
 }

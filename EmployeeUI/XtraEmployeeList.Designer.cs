@@ -54,6 +54,7 @@
             this.colBirthDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSalary = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStartingDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colOffDayEndDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colEndingDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colReasonOfLeaving = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colEdit = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -152,7 +153,7 @@
             this.btnDismiss.Size = new System.Drawing.Size(281, 55);
             this.btnDismiss.StyleController = this.layoutControl1;
             this.btnDismiss.TabIndex = 8;
-            this.btnDismiss.Text = "İşten Çıkarılan";
+            this.btnDismiss.Text = "Ayrılan";
             this.btnDismiss.Click += new System.EventHandler(this.btnDismiss_Click);
             // 
             // btnOff
@@ -259,6 +260,7 @@
             this.colBirthDate,
             this.colSalary,
             this.colStartingDate,
+            this.colOffDayEndDate,
             this.colEndingDate,
             this.colReasonOfLeaving,
             this.colEdit,
@@ -267,6 +269,7 @@
             this.colReHired});
             this.gridView1.GridControl = this.gCEmployeeList;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsView.ShowAutoFilterRow = true;
             // 
             // colId
             // 
@@ -324,13 +327,21 @@
             this.colStartingDate.Visible = true;
             this.colStartingDate.VisibleIndex = 5;
             // 
+            // colOffDayEndDate
+            // 
+            this.colOffDayEndDate.Caption = "İzin Bitiş Tarihi";
+            this.colOffDayEndDate.FieldName = "OffDayEndDate";
+            this.colOffDayEndDate.Name = "colOffDayEndDate";
+            this.colOffDayEndDate.Visible = true;
+            this.colOffDayEndDate.VisibleIndex = 6;
+            // 
             // colEndingDate
             // 
             this.colEndingDate.Caption = "İşten Çıkış Tarihi";
             this.colEndingDate.FieldName = "EndingDate";
             this.colEndingDate.Name = "colEndingDate";
             this.colEndingDate.Visible = true;
-            this.colEndingDate.VisibleIndex = 6;
+            this.colEndingDate.VisibleIndex = 7;
             // 
             // colReasonOfLeaving
             // 
@@ -338,7 +349,7 @@
             this.colReasonOfLeaving.FieldName = "ReasonOfLeaving";
             this.colReasonOfLeaving.Name = "colReasonOfLeaving";
             this.colReasonOfLeaving.Visible = true;
-            this.colReasonOfLeaving.VisibleIndex = 7;
+            this.colReasonOfLeaving.VisibleIndex = 8;
             // 
             // colEdit
             // 
@@ -346,7 +357,7 @@
             this.colEdit.ColumnEdit = this.repositoryBtnEdit;
             this.colEdit.Name = "colEdit";
             this.colEdit.Visible = true;
-            this.colEdit.VisibleIndex = 8;
+            this.colEdit.VisibleIndex = 9;
             // 
             // repositoryBtnEdit
             // 
@@ -363,7 +374,7 @@
             this.colEmployeeQuit.ColumnEdit = this.repositoryBtnEmployeeQuit;
             this.colEmployeeQuit.Name = "colEmployeeQuit";
             this.colEmployeeQuit.Visible = true;
-            this.colEmployeeQuit.VisibleIndex = 9;
+            this.colEmployeeQuit.VisibleIndex = 10;
             // 
             // repositoryBtnEmployeeQuit
             // 
@@ -381,7 +392,7 @@
             this.colDelete.ColumnEdit = this.repositoryBtnDelete;
             this.colDelete.Name = "colDelete";
             this.colDelete.Visible = true;
-            this.colDelete.VisibleIndex = 10;
+            this.colDelete.VisibleIndex = 11;
             // 
             // repositoryBtnDelete
             // 
@@ -398,7 +409,7 @@
             this.colReHired.ColumnEdit = this.repositoryBtnReHired;
             this.colReHired.Name = "colReHired";
             this.colReHired.Visible = true;
-            this.colReHired.VisibleIndex = 11;
+            this.colReHired.VisibleIndex = 12;
             // 
             // repositoryBtnReHired
             // 
@@ -557,6 +568,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colBirthDate;
         private DevExpress.XtraGrid.Columns.GridColumn colSalary;
         private DevExpress.XtraGrid.Columns.GridColumn colStartingDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colOffDayEndDate;
         private DevExpress.XtraGrid.Columns.GridColumn colEndingDate;
         private DevExpress.XtraGrid.Columns.GridColumn colReasonOfLeaving;
         private DevExpress.XtraGrid.Columns.GridColumn colEdit;

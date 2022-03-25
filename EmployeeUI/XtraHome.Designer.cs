@@ -35,10 +35,16 @@
             this.btnClose = new DevExpress.XtraBars.BarButtonItem();
             this.btnDepartment = new DevExpress.XtraBars.BarButtonItem();
             this.btnEmployeeAdd = new DevExpress.XtraBars.BarButtonItem();
+            this.btnOffDayAdd = new DevExpress.XtraBars.BarButtonItem();
+            this.btnOffDayList = new DevExpress.XtraBars.BarButtonItem();
+            this.btnPayrollParameter = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.btnPayroll = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             this.SuspendLayout();
@@ -52,9 +58,13 @@
             this.btnEmployee,
             this.btnClose,
             this.btnDepartment,
-            this.btnEmployeeAdd});
+            this.btnEmployeeAdd,
+            this.btnOffDayAdd,
+            this.btnOffDayList,
+            this.btnPayrollParameter,
+            this.btnPayroll});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 5;
+            this.ribbonControl1.MaxItemId = 9;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
@@ -96,21 +106,64 @@
             this.btnEmployeeAdd.Name = "btnEmployeeAdd";
             this.btnEmployeeAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEmployeeAdd_ItemClick);
             // 
+            // btnOffDayAdd
+            // 
+            this.btnOffDayAdd.Caption = "Persone İzin Girişi";
+            this.btnOffDayAdd.Id = 5;
+            this.btnOffDayAdd.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnOffDayAdd.ImageOptions.Image")));
+            this.btnOffDayAdd.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnOffDayAdd.ImageOptions.LargeImage")));
+            this.btnOffDayAdd.Name = "btnOffDayAdd";
+            this.btnOffDayAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnOffDayAdd_ItemClick);
+            // 
+            // btnOffDayList
+            // 
+            this.btnOffDayList.Caption = "Personel İzin Listesi";
+            this.btnOffDayList.Id = 6;
+            this.btnOffDayList.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnOffDayList.ImageOptions.Image")));
+            this.btnOffDayList.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnOffDayList.ImageOptions.LargeImage")));
+            this.btnOffDayList.Name = "btnOffDayList";
+            this.btnOffDayList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnOffDayList_ItemClick);
+            // 
+            // btnPayrollParameter
+            // 
+            this.btnPayrollParameter.Caption = "Bordro Parametereleri";
+            this.btnPayrollParameter.Id = 7;
+            this.btnPayrollParameter.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnPayrollParameter.ImageOptions.Image")));
+            this.btnPayrollParameter.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnPayrollParameter.ImageOptions.LargeImage")));
+            this.btnPayrollParameter.Name = "btnPayrollParameter";
+            this.btnPayrollParameter.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPayrollParameter_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup3,
             this.ribbonPageGroup1,
+            this.ribbonPageGroup4,
             this.ribbonPageGroup2});
             this.ribbonPage1.Name = "ribbonPage1";
             this.ribbonPage1.Text = "Personel Takip";
             // 
+            // ribbonPageGroup3
+            // 
+            this.ribbonPageGroup3.ItemLinks.Add(this.btnEmployee);
+            this.ribbonPageGroup3.ItemLinks.Add(this.btnDepartment);
+            this.ribbonPageGroup3.ItemLinks.Add(this.btnOffDayList);
+            this.ribbonPageGroup3.ItemLinks.Add(this.btnPayroll);
+            this.ribbonPageGroup3.Name = "ribbonPageGroup3";
+            this.ribbonPageGroup3.Text = "Listeler";
+            // 
             // ribbonPageGroup1
             // 
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnEmployee);
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnDepartment);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnEmployeeAdd);
+            this.ribbonPageGroup1.ItemLinks.Add(this.btnOffDayAdd);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "Kayıt";
+            // 
+            // ribbonPageGroup4
+            // 
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnPayrollParameter);
+            this.ribbonPageGroup4.Name = "ribbonPageGroup4";
+            this.ribbonPageGroup4.Text = "Parametler";
             // 
             // ribbonPageGroup2
             // 
@@ -121,6 +174,15 @@
             // xtraTabbedMdiManager1
             // 
             this.xtraTabbedMdiManager1.MdiParent = this;
+            // 
+            // btnPayroll
+            // 
+            this.btnPayroll.Caption = "Bordro";
+            this.btnPayroll.Id = 8;
+            this.btnPayroll.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
+            this.btnPayroll.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
+            this.btnPayroll.Name = "btnPayroll";
+            this.btnPayroll.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPayroll_ItemClick);
             // 
             // XtraHome
             // 
@@ -151,5 +213,11 @@
         private DevExpress.XtraBars.BarButtonItem btnDepartment;
         private DevExpress.XtraTabbedMdi.XtraTabbedMdiManager xtraTabbedMdiManager1;
         private DevExpress.XtraBars.BarButtonItem btnEmployeeAdd;
+        private DevExpress.XtraBars.BarButtonItem btnOffDayAdd;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
+        private DevExpress.XtraBars.BarButtonItem btnOffDayList;
+        private DevExpress.XtraBars.BarButtonItem btnPayrollParameter;
+        private DevExpress.XtraBars.BarButtonItem btnPayroll;
     }
 }

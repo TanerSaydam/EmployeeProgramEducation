@@ -18,11 +18,13 @@ namespace EmployeeUI
     {
         private readonly IEmployeeService _employeeService;
         private readonly IDepartmentService _deparmentService;
-        public XtraEmployeeList(IEmployeeService employeeService, IDepartmentService deparmentService)
+        private readonly IOffDayService _offDayService;
+        public XtraEmployeeList(IEmployeeService employeeService, IDepartmentService deparmentService, IOffDayService offDayService)
         {
             InitializeComponent();
             _employeeService = employeeService;
             _deparmentService = deparmentService;
+            _offDayService = offDayService;
         }
 
         private void XtraEmployeeList_Load(object sender, EventArgs e)
@@ -33,7 +35,26 @@ namespace EmployeeUI
         
         public void GetList()
         {   
+            var employees = _employeeService.GetAll().Where(e => e.Status != "İşten Ayrıldı").ToList();
+
+            foreach (var item in employees)
+            {
+                string date = DateTime.Now.ToShortDateString();
+                var result = _offDayService.GetEmployeeOfDayByDate(item.Id, Convert.ToDateTime(date));
+                if (result != null)
+                {
+                    item.Status = "İzinli";
+                    _employeeService.UpdateList(item);
+                }
+                else
+                {
+                    item.Status = "Çalışıyor";
+                    _employeeService.UpdateList(item);
+                }
+            }
+
             var employeeList = _employeeService.GetEmployeeList();
+
             gCEmployeeList.DataSource = employeeList.Where(e => e.Status == "Çalışıyor").ToList();
 
             var departmentList = _deparmentService.GetListEmployeeCount();
@@ -48,12 +69,13 @@ namespace EmployeeUI
 
             lbActiveList.Text = "Çalışan Listesi";
 
-            gridView1.Columns[7].Visible = false; //İşten Ayrılma Tarihi
-            gridView1.Columns[8].Visible = false; //Ayrılma Sebebi
-            gridView1.Columns[9].Visible = true; //Güncelle
-            gridView1.Columns[10].Visible = true; //İşten Çıkart
-            gridView1.Columns[11].Visible = true; //Sil
-            gridView1.Columns[12].Visible = false; //İşte Tekrar Al
+            gridView1.Columns[7].Visible = false; //İşten Bitiş Tarihi
+            gridView1.Columns[8].Visible = false; //İşten Ayrılma Tarihi
+            gridView1.Columns[9].Visible = false; //Ayrılma Sebebi
+            gridView1.Columns[10].Visible = true; //Güncelle
+            gridView1.Columns[11].Visible = true; //İşten Çıkart
+            gridView1.Columns[12].Visible = true; //Sil
+            gridView1.Columns[13].Visible = false; //İşte Tekrar Al
         }
 
         void GetOffEmployeeList()
@@ -63,12 +85,13 @@ namespace EmployeeUI
 
             lbActiveList.Text = "İzinli Listesi";
 
-            gridView1.Columns[7].Visible = false; //İşten Ayrılma Tarihi
-            gridView1.Columns[8].Visible = false; //Ayrılma Sebebi
-            gridView1.Columns[9].Visible = true; //Güncelle
-            gridView1.Columns[10].Visible = true; //İşten Çıkart
-            gridView1.Columns[11].Visible = true; //Sil
-            gridView1.Columns[12].Visible = false; //İşte Tekrar Al
+            gridView1.Columns[7].Visible = true; //İzin Bitiş Tarihi
+            gridView1.Columns[8].Visible = false; //İşten Ayrılma Tarihi
+            gridView1.Columns[9].Visible = false; //Ayrılma Sebebi
+            gridView1.Columns[10].Visible = true; //Güncelle
+            gridView1.Columns[11].Visible = true; //İşten Çıkart
+            gridView1.Columns[12].Visible = true; //Sil
+            gridView1.Columns[13].Visible = false; //İşte Tekrar Al
         }
 
         void GetDismissEmployeeList()
@@ -78,12 +101,13 @@ namespace EmployeeUI
 
             lbActiveList.Text = "Ayrılanlar Listesi";
 
-            gridView1.Columns[8].Visible = true; //Ayrılma Sebebi
-            gridView1.Columns[7].Visible = true; //İşten Ayrılma Tarihi            
-            gridView1.Columns[9].Visible = false; //Güncelle
-            gridView1.Columns[10].Visible = false; //İşten Çıkart
-            gridView1.Columns[11].Visible = false; //Sil
-            gridView1.Columns[12].Visible = true; //İşte Tekrar Al
+            gridView1.Columns[7].Visible = false; //İzin Bitiş Tarihi
+            gridView1.Columns[9].Visible = true; //Ayrılma Sebebi
+            gridView1.Columns[8].Visible = true; //İşten Ayrılma Tarihi            
+            gridView1.Columns[10].Visible = false; //Güncelle
+            gridView1.Columns[11].Visible = false; //İşten Çıkart
+            gridView1.Columns[12].Visible = false; //Sil
+            gridView1.Columns[13].Visible = true; //İşte Tekrar Al
 
         }
 
